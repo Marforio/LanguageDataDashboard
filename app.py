@@ -142,6 +142,8 @@ def make_highlighted_figure(df, selected_columns, yaxis_title, title, percent=Fa
     return fig
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+server = app.server
+
 app.title = "Languages in the Swiss Workplace"
 app.layout = dbc.Container([
     dbc.Row([
