@@ -8,6 +8,7 @@ from dash.dependencies import Input, Output, State
 import dash_bootstrap_components as dbc
 import plotly.express as px
 import plotly.graph_objs as go
+from flask import Response
 
 
 base_dir = os.getcwd() 
@@ -212,10 +213,15 @@ app.layout = dbc.Container([
     ])
 ], fluid=True)
 
+@server.route("/healthz")
+def health_check():
+    return Response("OK", status=200)
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8050))
     app.run_server(host='0.0.0.0', port=port)
+
+
 
 """
 if __name__ == '__main__':
