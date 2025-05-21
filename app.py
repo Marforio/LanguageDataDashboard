@@ -188,7 +188,7 @@ app.layout = dbc.Container([
                         "Regularly spoken languages in the Swiss workplace"
                     )
                 ),
-                width={"xs": 12, "md": 9}, style={"maxWidth": "1000px"}, className="m-3"
+                width={"xs": 12, "md": 9}, style={"minWidth": "250px", "maxWidth": "1000px"}, className="m-3"
             ),
             dbc.Col(dbc.Card([
                 dbc.CardHeader(html.H4("English in 2023")),
@@ -219,7 +219,7 @@ app.layout = dbc.Container([
                         percent=True
                     )
                 ),
-                width={"xs": 12, "md": 9}, style={"maxWidth": "1000px"}, className="m-3"
+                width={"xs": 12, "md": 9}, style={"minWidth": "250px", "maxWidth": "1000px"}, className="m-3"
             ),
             dbc.Col(dbc.Card([
                 dbc.CardHeader(html.H4("English in 2023")),
