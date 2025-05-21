@@ -170,56 +170,74 @@ app.layout = dbc.Container([
                 html.A(
                     "Die üblicherweise bei der Arbeit gesprochenen Sprachen",
                     href="https://opendata.swiss/en/dataset/die-ublicherweise-bei-der-arbeit-gesprochenen-sprachen1",
-                    target="_blank"  
+                    target="_blank"
                 )
             ]),
             className="text-center"
         )
     ]),
-    dbc.Row([
-        dbc.Col(
-            dcc.Graph(
-                figure=make_highlighted_figure(
-                    clean_data, selected_columns,
-                    "Number of speakers in millions",
-                    "Regularly spoken languages in the Swiss workplace"
-                )
+
+    # Row 1: Absolute numbers
+    html.Div([
+        dbc.Row([
+            dbc.Col(
+                dcc.Graph(
+                    figure=make_highlighted_figure(
+                        clean_data, selected_columns,
+                        "Number of speakers in millions",
+                        "Regularly spoken languages in the Swiss workplace"
+                    )
+                ),
+                width={"xs": 12, "md": 9}, style={"maxWidth": "1000px"}, className="m-3"
             ),
-            width={"size": 9}, className="m-4"
-        ),
-        dbc.Col(dbc.Card([
-            dbc.CardHeader(html.H4("English in 2023")),
-            dbc.CardBody([
-                html.H2(f"{english_latest_pretty}M"), 
-                html.P("English speakers in the Swiss workplace"),
-                html.H2(f"{percent_increase_english:.2f}%"),
-                html.P(f"increase since 2020"),
-            ])
-        ]), width={"size": 2}, className="m-2 align-self-center")
-    ]),
-    dbc.Row([
-        dbc.Col(
-            dcc.Graph(
-                figure=make_highlighted_figure(
-                    clean_data_percentages, selected_columns,
-                    "Percentage of workforce (%)",
-                    "Percentage of Swiss workforce that regularly speaks the language",
-                    percent=True
-                )
+            dbc.Col(dbc.Card([
+                dbc.CardHeader(html.H4("English in 2023")),
+                dbc.CardBody([
+                    html.H2(f"{english_latest_pretty}M"),
+                    html.P("English speakers in the Swiss workplace"),
+                    html.H2(f"{percent_increase_english:.2f}%"),
+                    html.P("increase since 2020"),
+                ])
+            ]), width={"size": 2}, style={"minWidth": "250px"}, className="m-3 align-self-center")
+        ])
+    ], style={
+        "display": "flex",
+        "justifyContent": "center",
+        "flexWrap": "wrap",
+        "width": "100%"
+    }),
+
+    # Row 2: Percentages
+    html.Div([
+        dbc.Row([
+            dbc.Col(
+                dcc.Graph(
+                    figure=make_highlighted_figure(
+                        clean_data_percentages, selected_columns,
+                        "Percentage of workforce (%)",
+                        "Percentage of Swiss workforce that regularly speaks the language",
+                        percent=True
+                    )
+                ),
+                width={"xs": 12, "md": 9}, style={"maxWidth": "1000px"}, className="m-3"
             ),
-            width={"size": 9}, className="m-4"
-        ),
-        dbc.Col(dbc.Card([
-            dbc.CardHeader(html.H4("English in 2023")),
-            dbc.CardBody([
-                html.H2(f"{latest_English_percentage}%"),
-                html.P("of the Swiss workforce speaks English regularly"),
-                html.H2(f"{percent_increase_english_percentage}%"),
-                html.P("increase since 2010"),
-            ])
-        ]), width={"size": 2}, className="m-2 align-self-center")
-    ])
-], fluid=True)
+            dbc.Col(dbc.Card([
+                dbc.CardHeader(html.H4("English in 2023")),
+                dbc.CardBody([
+                    html.H2(f"{latest_English_percentage}%"),
+                    html.P("of the Swiss workforce speaks English regularly"),
+                    html.H2(f"{percent_increase_english_percentage}%"),
+                    html.P("increase since 2010"),
+                ])
+            ]), width={"size": 2}, style={"minWidth": "250px"}, className="m-3 align-self-center")
+        ])
+    ], style={
+        "display": "flex",
+        "justifyContent": "center",
+        "flexWrap": "wrap",
+        "width": "100%"
+    })
+], fluid=True)  
 
 logging.debug("Html rendered...")
 
@@ -234,8 +252,8 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
 
 
-
 """
+
 if __name__ == '__main__':
     app.run(debug=True)
 """
