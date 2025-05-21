@@ -126,16 +126,21 @@ def make_highlighted_figure(df, selected_columns, yaxis_title, title, percent=Fa
                 line=dict(width=2)
             ))
     fig.update_layout(
-    title={
-        'text': title,
-        'font': {
-            'size': 22,
+        xaxis=dict(
+            tickmode='array',
+            tickvals=[year for year in df.index if int(year) % 2 == 0 or int(year) == 2023],  # every 2 years
+            ticktext=[str(year) for year in df.index if int(year) % 2 == 0 or int(year) == 2023]
+        ),
+        title={
+            'text': title,
+            'font': {
+                'size': 22,
+            },
         },
-    },
-    xaxis_title="Year",
-    yaxis_title=yaxis_title,
-    legend_title="Language"
-    )
+        xaxis_title="Year",
+        yaxis_title=yaxis_title,
+        legend_title="Language"
+        )
 
     if percent:
         fig.update_yaxes(ticksuffix="%")
@@ -174,7 +179,7 @@ app.layout = dbc.Container([
             width={"size": 9}, className="m-4"
         ),
         dbc.Col(dbc.Card([
-            dbc.CardHeader(html.H4("English")),
+            dbc.CardHeader(html.H4("English in 2023")),
             dbc.CardBody([
                 html.H2(f"{english_latest_pretty}M"), 
                 html.P("English speakers in the Swiss workplace"),
@@ -196,7 +201,7 @@ app.layout = dbc.Container([
             width={"size": 9}, className="m-4"
         ),
         dbc.Col(dbc.Card([
-            dbc.CardHeader(html.H4("English")),
+            dbc.CardHeader(html.H4("English in 2023")),
             dbc.CardBody([
                 html.H2(f"{latest_English_percentage}%"),
                 html.P("of the Swiss workforce speaks English regularly"),
