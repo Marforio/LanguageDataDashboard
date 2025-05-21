@@ -9,6 +9,10 @@ import dash_bootstrap_components as dbc
 import plotly.express as px
 import plotly.graph_objs as go
 from flask import Response
+import logging
+
+logging.basicConfig(filename='logfile.txt', level=logging.DEBUG)
+logging.debug("App is starting...")
 
 
 base_dir = os.getcwd() 
@@ -147,8 +151,12 @@ def make_highlighted_figure(df, selected_columns, yaxis_title, title, percent=Fa
         fig.update_yaxes(ticksuffix="%")
     return fig
 
+logging.debug("Data prepared...")
+
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
+
+logging.debug("App launched...")
 
 app.title = "Languages in the Swiss Workplace"
 app.layout = dbc.Container([
@@ -213,9 +221,13 @@ app.layout = dbc.Container([
     ])
 ], fluid=True)
 
+logging.debug("Html rendered...")
+
 @server.route("/healthz")
 def health_check():
     return Response("OK", status=200)
+
+logging.debug("healthz route set up...")
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8050))
